@@ -71,9 +71,9 @@ public class HuffProcessor {
 	}
 	public HuffNode readTreeHeader(BitInputStream in) {
 		int bit = in.readBits(1);
-		if(bit == -1) {
-			throw new HuffException("invalid");
-		}
+//		if(bit == -1) {
+//			throw new HuffException("invalid");
+//		}
 		if(bit == 0) {
 			HuffNode left = readTreeHeader(in);
 			HuffNode right = readTreeHeader(in);
