@@ -65,22 +65,22 @@ public class HuffProcessor {
 			if (val == -1) break;
 			out.writeBits(BITS_PER_WORD, val);
 		}
-		HuffNode root = readTreeHeader(in);
-		readCompressedBits(root, in, out);
+//		HuffNode root = readTreeHeader(in);
+//		readCompressedBits(root, in, out);
 		out.close();
 	}
 	public HuffNode readTreeHeader(BitInputStream in) {
 		int bit = in.readBits(1);
-//		if(bit == -1) {
-//			throw new HuffException("invalid");
-//		}
+		if(bit == -1) {
+			throw new HuffException("invalid");
+		}
 		if(bit == 0) {
 			HuffNode left = readTreeHeader(in);
 			HuffNode right = readTreeHeader(in);
 			return new HuffNode(0, 0, left, right);
 		}
 		else {
-			int bits = in.readBits(BITS_PER_WORD+1);
+			int bits = in.readBits(BITS_PER_WORD);
 			return new HuffNode(bits, 0, null, null);
 		}
 	}
@@ -88,9 +88,9 @@ public class HuffProcessor {
 		HuffNode current = root;
 		while(true) {
 			int bits = in.readBits(1);
-//			if(bits == -1) {
-//				throw new HuffException("bad input");
-//			}
+			if(bits == -1) {
+				throw new HuffException("bad input");
+			}
 			else {
 				if(bits == 0) current = current.myLeft;
 				else current = current.myRight;
