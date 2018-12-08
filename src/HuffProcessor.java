@@ -108,6 +108,7 @@ public class HuffProcessor {
 
 	public void writeHeader(HuffNode root, BitOutputStream out) {
 		HuffNode current = root;
+		if(root == null) return;
 		while(true) {
 			if(current.myLeft == null && current.myRight == null) {
 				out.writeBits(1, 1);
