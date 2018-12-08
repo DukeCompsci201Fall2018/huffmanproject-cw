@@ -97,13 +97,11 @@ public class HuffProcessor {
 	private void codingHelper(HuffNode root, String path, String[] encodings) {
 		HuffNode current = root;
 			if(current.myRight == null && current.myLeft == null) {
-				path += current.myValue;
 				encodings[current.myValue] = path;
 			}
 			else {
-				path += current.myValue;
-				codingHelper(current.myRight, path, encodings);
-				codingHelper(current.myLeft, path, encodings);
+				codingHelper(current.myRight, path+"1", encodings);
+				codingHelper(current.myLeft, path+"0", encodings);
 			}
 		}
 
