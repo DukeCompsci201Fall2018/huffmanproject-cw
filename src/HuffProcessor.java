@@ -65,10 +65,9 @@ public class HuffProcessor {
 		}
 		return freq;
 	}
+	
 	public HuffNode makeTreeFromCounts(int[] freq) {
 		PriorityQueue<HuffNode> pq = new PriorityQueue<>();
-
-
 		for(int i = 0; i < freq.length; i++) {
 			if(freq[i] > 0) {
 				pq.add(new HuffNode(i,freq[i],null,null));
@@ -78,7 +77,7 @@ public class HuffProcessor {
 		while (pq.size() > 1) {
 		    HuffNode left = pq.remove();
 		    HuffNode right = pq.remove();
-		    HuffNode t = new HuffNode(0, left.myWeight+right.myWeight);
+		    HuffNode t = new HuffNode(0, left.myWeight+right.myWeight,left,right);
 		    // create new HuffNode t with weight from
 		    // left.weight+right.weight and left, right subtrees
 		    pq.add(t);
